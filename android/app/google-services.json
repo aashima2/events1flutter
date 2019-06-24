@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "757219007742",
+    "firebase_url": "https://futter-sign.firebaseio.com",
+    "project_id": "futter-sign",
+    "storage_bucket": "futter-sign.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757219007742:android:3c2dfd336afd18c7",
+        "android_client_info": {
+          "package_name": "com.example.googlesign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757219007742-rlrl8s5r3phre7ejko72mnk4u8ios6t9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.googlesign",
+            "certificate_hash": "8fe89e51af45fd87b1db2467ea0dda449ccdcf54"
+          }
+        },
+        {
+          "client_id": "757219007742-8lb6pt0b94d1u7sg4uud1uu5t69dnn0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA73-BygPvd7jZ28lRGthJPG_bNqMeqjOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757219007742-8lb6pt0b94d1u7sg4uud1uu5t69dnn0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
