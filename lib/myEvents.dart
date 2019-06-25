@@ -94,6 +94,7 @@ class _myEventsState extends State<myEvents>
     service.currentUser().then((uid) {
       setState(() {
         this.uid = uid;
+        print('uid'+ uid);
         DocumentReference documentReference =
             Firestore.instance.collection('users').document(uid);
         documentReference.get().then((datasnapshot) {
@@ -221,6 +222,7 @@ class _myEventsState extends State<myEvents>
                                             fontSize: 18.0,
                                             color: Colors.white,
                                           ),
+
                                         ),
                                         Text(
                                           name,
@@ -256,7 +258,7 @@ class _myEventsState extends State<myEvents>
                     ),
                     StreamBuilder(
                         stream:
-                            Firestore.instance.collection('events').snapshots(),
+                            Firestore.instance.collection('events').where('uid',isEqualTo: uid).snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData)
                             return Center(
@@ -291,6 +293,21 @@ class _myEventsState extends State<myEvents>
       key: Key(document.documentID),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
+        Firestore.instance
+            .collection('events')
+            .document(document.documentID)
+            .delete()
+             .catchError((e){
+               String $e;
+               print('e'+ $e);
+             }).then((value) {
+          Firestore.instance
+              .collection('Activity')
+              .where("documentreference", isEqualTo: document.documentID)
+              .snapshots()
+              .listen((data) =>
+                  data.documents.forEach((doc) => doc.reference.delete()));
+        });
         final snackBar = SnackBar(
             duration: Duration(seconds: 2),
             backgroundColor: Colors.black,
@@ -302,18 +319,6 @@ class _myEventsState extends State<myEvents>
                   fontSize: 15.0),
             ));
         Scaffold.of(context).showSnackBar(snackBar);
-        Firestore.instance
-            .collection('events')
-            .document(document.documentID)
-            .delete()
-            .whenComplete(() {
-          Firestore.instance
-              .collection('Activity')
-              .where("documentreference", isEqualTo: document.documentID)
-              .snapshots()
-              .listen((data) =>
-                  data.documents.forEach((doc) => doc.reference.delete()));
-        });
       },
       child: Padding(
         padding: const EdgeInsets.all(3.0),
